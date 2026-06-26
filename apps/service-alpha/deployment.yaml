@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-alpha
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-alpha
+  template:
+    metadata:
+      labels:
+        app: service-alpha
+    spec:
+      containers:
+        - name: service-alpha
+          image: 554716176680.dkr.ecr.ap-south-1.amazonaws.com/service-alpha:latest
+          ports:
+            - containerPort: 5000
+          env:
+            - name: SERVICE_NAME
+              value: "service-alpha"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-alpha
+  namespace: default
+spec:
+  selector:
+    app: service-alpha
+  ports:
+    - port: 80
+      targetPort: 5000
+  type: ClusterIP
