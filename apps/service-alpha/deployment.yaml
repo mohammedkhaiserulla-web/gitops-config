@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: service-alpha
-          image:554716176680.dkr.ecr.ap-south-1.amazonaws.com/service-alpha:58f2ad83
+          image: 554716176680.dkr.ecr.ap-south-1.amazonaws.com/service-alpha:58f2ad83
           ports:
             - containerPort: 5000
           env:
