@@ -21,6 +21,27 @@ spec:
           env:
             - name: SERVICE_NAME
               value: "service-alpha"
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: service-alpha-secret
+                  key: api_key
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: service-alpha-secret
+                  key: db_password
+          volumeMounts:
+            - name: secrets-store
+              mountPath: "/mnt/secrets"
+              readOnly: true
+      volumes:
+        - name: secrets-store
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "service-alpha-secrets"
 ---
 apiVersion: v1
 kind: Service
