@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com//gitops-config.git
+    repoURL: https://github.com/mohammedkhaiserulla-web/gitops-config.git
     targetRevision: HEAD
     path: apps/service-alpha
   destination:
