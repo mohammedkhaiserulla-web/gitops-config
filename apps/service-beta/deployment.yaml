@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-beta
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-beta
+  template:
+    metadata:
+      labels:
+        app: service-beta
+    spec:
+      containers:
+        - name: service-beta
+          image:554716176680.dkr.ecr.ap-south-1.amazonaws.com/service-beta:be314aa7
+          ports:
+            - containerPort: 5000
+          env:
+            - name: SERVICE_NAME
+              value: "service-beta"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-beta
+  namespace: default
+spec:
+  selector:
+    app: service-beta
+  ports:
+    - port: 80
+      targetPort: 5000
+  type: ClusterIP
